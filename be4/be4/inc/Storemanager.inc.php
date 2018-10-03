@@ -13,7 +13,7 @@ class StoreManager {
     
     public function stockUp() {
         foreach ( $this->_productList as $product ) {
-            $product->addStock(1);
+            $product->addStock(100);
         }
     }
 }

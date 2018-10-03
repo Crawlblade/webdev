@@ -4,6 +4,7 @@ class Golfball implements Sellable {
     private $color;
     private $ballsLeft;
 
+
     public function getIndents() {
         return $this->indents;
     }
@@ -26,18 +27,36 @@ class Golfball implements Sellable {
     
     public function sellItem() {
         $returnVal = false;
-        if ( $this->ballsLeft > 0 ) {
+        if ($this->ballsLeft > 0) {
             $this->ballsLeft--;
             $returnVal = true;
         }
-        else if ($returnVal == false) {
-            printf("There are no more golfballs in stock. Sorry!\n");
-        }
-
         return $returnVal;
     }
-    
+
+    public function sellMultiItems($n) {
+        $returnVal = false;
+        if ( $this->ballsLeft >= $n ) {
+            $this->ballsLeft -= $n;
+            $returnVal = true;
+        }
+        return $returnVal;
+    }    
     public function getStockLevel() {
         return $this->ballsLeft;
+    }
+
+    public function __toString() {
+        $s = '';
+        $s .= sprintf("        <tr><td>%s</td>"
+                . "<td>%s</td>"
+                . "<td><img src='getImage.php?color=%s&amp;dimples=%s' width='320' height='240'/></td>"
+                . "<td>%s</td></tr>\n"
+                , $this->getColor()
+                , $this->getDimples()
+                , $this->getColor()
+                , $this->getDimples()
+                , $this->getStockLevel());
+        return $s;
     }
 }
